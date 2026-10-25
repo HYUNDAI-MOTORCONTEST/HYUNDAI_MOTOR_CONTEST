@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Compose가 실제 테마를 그린다(ui/theme/Theme.kt). 윈도 배경만 주간/야간에 맞춰 시작 시 깜빡임을 막는다. -->
+    <style name="Theme.HmgApp" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+    </style>
+</resources>

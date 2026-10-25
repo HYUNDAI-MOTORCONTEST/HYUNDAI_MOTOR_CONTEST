@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 주간: Pleos basic_00 Light. 화면 색은 Compose(ui/theme/PleosColors.kt)가 그린다. 여기 값은 시작 깜빡임 방지용 -->
+    <color name="background">#FFFFFFFF</color>
+    <color name="ic_launcher_background">#FF0E1116</color>
+    <color name="ic_launcher_foreground">#FF4FC3F7</color>
+</resources>

@@ -1,0 +1,47 @@
+# ---- Gradle ----
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+.kotlin/
+
+# ---- Android ----
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+# 제출용 release APK는 저장소에 포함한다 (공모전 규칙: apk/팀명_앱이름_release.apk)
+!apk/
+!apk/*.apk
+
+# ---- 서명 키 (절대 커밋 금지) ----
+*.jks
+*.keystore
+keystore.properties
+
+# ---- IntelliJ / Android Studio ----
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# ---- 환경 변수 / 시크릿 ----
+.env*
+!.env.example
+
+# ---- Claude Code 개인 설정 (프로젝트 공용 설정·스킬·.mcp.json은 커밋) ----
+.claude/settings.local.json
+
+# ---- OS / 기타 ----
+.DS_Store
+Thumbs.db
+*.log
+
+# ---- 개발 프로세스 로그·PID (scripts/setup.sh, scripts/dev-down.sh) ----
+.dev/
