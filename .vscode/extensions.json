@@ -1,0 +1,14 @@
+// VS Code·Cursor 추천 확장(팀 공용). 폴더를 열면 "권장 확장 설치" 알림이 뜬다.
+// - JetBrains.kotlin-server: 공식 Kotlin LSP "Kotlin by JetBrains"(Alpha, Android Gradle Plugin 지원은 실험적). VS Marketplace·Open VSX(Cursor) 모두 있음.
+//   https://github.com/Kotlin/kotlin-lsp , https://marketplace.visualstudio.com/items?itemName=JetBrains.kotlin-server
+// - vscjava.vscode-gradle: Gradle for Java(Gradle 작업 트리·실행). https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-gradle
+// - jetbrains.kotlin: 위 Kotlin 확장의 예전 ID. 같이 깔려 있으면 새 확장이 제대로 동작하지 않는다(kotlin-lsp README).
+{
+  "recommendations": [
+    "JetBrains.kotlin-server",
+    "vscjava.vscode-gradle"
+  ],
+  "unwantedRecommendations": [
+    "jetbrains.kotlin"
+  ]
+}

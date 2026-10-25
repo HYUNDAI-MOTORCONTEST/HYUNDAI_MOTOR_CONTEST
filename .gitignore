@@ -25,11 +25,18 @@ captures/
 keystore.properties
 
 # ---- IntelliJ / Android Studio ----
+# .idea/는 PC마다 달라 전부 제외한다. 공유 실행 구성은 루트 .run/*.run.xml에 둔다(커밋 대상).
 .idea/
 *.iml
 *.ipr
 *.iws
 out/
+
+# ---- VS Code / Cursor (공용 tasks·extensions·settings만 커밋) ----
+.vscode/*
+!.vscode/tasks.json
+!.vscode/extensions.json
+!.vscode/settings.json
 
 # ---- 환경 변수 / 시크릿 ----
 .env*
