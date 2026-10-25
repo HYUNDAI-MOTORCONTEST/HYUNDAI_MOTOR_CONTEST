@@ -3,6 +3,7 @@
 agp = "9.4.1"
 kotlin = "2.4.21"
 spring-boot = "4.1.2"
+idea-ext = "1.4.1"            # IDE 동기화 후 devSetup 실행(taskTriggers)
 
 # Android 앱
 android-compileSdk = "37"
@@ -54,3 +55,4 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+idea-ext = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "idea-ext" }

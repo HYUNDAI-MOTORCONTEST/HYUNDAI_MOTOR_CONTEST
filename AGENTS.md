@@ -22,6 +22,7 @@
 | `shared/` | `:shared` | 앱·서버 공용 DTO(순수 Kotlin JVM, kotlinx.serialization) |
 | `apk/` | - | 제출용 release APK(`apk/팀명_앱이름_release.apk`) |
 | `docs/guides/` | - | 차량 UI·개발 가이드 요약(직접 쓴 요약 + 원문 URL) |
+| `docs/contest/` | - | 공모전 규칙·일정·제출물·심사 기준·제출 전 체크리스트(`rules.md`) |
 | `scripts/` | - | 개발환경 세팅·에뮬레이터·Virtual Console·캡처·앱 실행 스크립트(bash) |
 | `licenses/` | - | 서드파티 라이선스 전문(Asta Sans OFL). 번들 글꼴·에셋을 추가하면 여기에 둔다 |
 | `gradle/libs.versions.toml` | - | 버전 카탈로그. 의존성 버전은 여기서만 바꾼다 |
@@ -30,6 +31,7 @@
 
 ```bash
 scripts/setup.sh                     # 개발환경 점검 + local.properties 생성 + 에뮬레이터·백엔드 자동 기동(훅이 실행)
+./gradlew devSetup                   # 같은 setup.sh를 Gradle 태스크로(IntelliJ·Android Studio가 동기화 후 자동 실행)
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"   # JDK 17+ (setup.sh 요약의 JDK 경로)
 
 ./gradlew :frontend:app:assembleDebug :backend:build :shared:build   # 전체 빌드
@@ -55,15 +57,19 @@ adb logcat -s HmgApp                 # 앱 로그
 | `scripts/pleos-console.sh` | Virtual Console 포워딩 + 브라우저 |
 | `scripts/screenshot.sh [파일]` | 화면 캡처(PNG) |
 | `scripts/run-app.sh [gradle 인자...]` | `installDebug` 후 앱 실행 |
+| `./gradlew devSetup` | 루트 `build.gradle.kts`의 Exec 태스크로 `scripts/setup.sh` 기본 모드 실행. idea-ext `afterSync`로 IDE 동기화 후에만 자동 실행되고 명령줄 빌드에는 끼지 않는다. `-Phmg.autostart=false`면 `HMG_AUTOSTART=0` |
 
 - `scripts/*.sh`는 bash(macOS·Linux 공용, macOS 기본 bash 3.2 호환)다. `ANDROID_HOME`이 없으면 macOS `~/Library/Android/sdk`, Linux `~/Android/Sdk` 순으로 찾고, JDK는 `JAVA_HOME`(17+) → Android Studio 내장 JBR → `/usr/libexec/java_home` 순으로 찾는다(`scripts/_common.sh`).
 - `scripts/setup.sh` 환경변수: `HMG_AUTOSTART=0`(자동 기동 끔, 하나만 끄려면 `HMG_AUTOSTART_EMU=0`/`HMG_AUTOSTART_BACKEND=0`), `PLEOS_AVD`(AVD 이름), `HMG_BACKEND_PORT`(기본 8081), `HMG_DEV_DIR`(로그·PID, 기본 `.dev/`, git 제외). 종료 코드는 항상 0이다.
+- IDE 설정: VS Code·Cursor `.vscode/tasks.json`(폴더 열 때 setup.sh, 작업 목록), Android Studio·IntelliJ `.run/*.run.xml`(공유 실행 구성) + `devSetup`. 사람용 안내는 README 2.2 표.
 - 자동 기동 로그: 백엔드 `.dev/backend.log`, 에뮬레이터 `.dev/pleos-emu.log`, 마지막 점검 결과 `.dev/setup-last.txt`.
 - `scripts/pleos-emu.sh`: Cold boot 필수(`-no-snapshot-load -no-snapshot-save`, quick boot에서는 VHAL을 못 쓴다). AVD 이름은 `PLEOS_AVD`(기본 `Pleos_Connect_v2.1.0`), 로그는 `PLEOS_EMU_LOG`(기본 `$TMPDIR/pleos-emu.log`)로 바꾼다. 나머지 인자는 `emulator`에 그대로 넘긴다.
 - 에뮬레이터에서 호스트 서버는 `http://10.0.2.2:8081`(debug 빌드만 평문 HTTP 허용). 포트를 바꾸려면 `scripts/run-app.sh -Phmg.backendUrl=http://10.0.2.2:9090`.
 - 주행 상태 바꾸기(운전 중 제한 테스트): `scripts/pleos-console.sh`로 연 Virtual Console에서 기어 D·속도를 준다. 이미지가 user 빌드라 `cmd car_service inject-vhal-event`는 막혀 있다(`docs/guides/pleos-dev.md` 6장).
 
 ## 공모전 필수 요건 (어기면 안 됨)
+
+전체 규칙·일정·제출 방법·심사 기준·제출 전 체크리스트는 **`docs/contest/rules.md`** 가 기준이다. 제출물·README·익명성과 관련된 작업 전에는 반드시 읽는다.
 
 - **Kotlin만 사용**한다(앱·서버·공용 모두). Java 소스를 추가하지 않는다.
 - **minSdk 28 이상**(차량 보안 요건: 서명 키 로테이션·리니지).

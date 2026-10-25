@@ -1,0 +1,17 @@
+// VS Code·Cursor 작업 영역 공용 설정(팀 공용). 개인 취향 설정(테마·글꼴·포맷터 등)은 사용자 설정에 둔다.
+{
+  "files.encoding": "utf8",
+  // Gradle·Kotlin 빌드 산출물과 setup.sh 로그(.dev/)는 감시·검색에서 뺀다(파일 감시 부하·검색 잡음 방지).
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/.gradle/**": true,
+    "**/.kotlin/**": true,
+    "**/.dev/**": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/.gradle": true,
+    "**/.kotlin": true,
+    "**/.dev": true
+  }
+}
