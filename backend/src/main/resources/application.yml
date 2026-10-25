@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: hmg-backend
+
+server:
+  port: 8081
+
+app:
+  version: 0.0.1

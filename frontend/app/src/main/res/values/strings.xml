@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HMG 차량 앱</string>
+
+    <!-- 운전 상태 배너 (한 메시지 3줄 이하, docs/guides/pleos-ui.md 7장) -->
+    <string name="drive_parked">주차 중</string>
+    <string name="drive_parked_detail">모든 기능 사용 가능</string>
+    <string name="drive_restricted">주행 중 · 제한 적용</string>
+    <string name="drive_restricted_detail">상세 정보는 주차 후 표시</string>
+    <string name="drive_connecting">주행 상태 확인 중</string>
+    <string name="drive_unavailable">주행 상태 확인 불가</string>
+    <string name="drive_unknown_detail">안전을 위해 제한 모드로 표시</string>
+    <string name="drive_flags">제한: %1$s</string>
+    <string name="flag_video">영상</string>
+    <string name="flag_setup">설정</string>
+    <string name="flag_keyboard">키보드</string>
+    <string name="flag_long_text">긴 글</string>
+
+    <!-- 카드 -->
+    <string name="health_title">서버 상태</string>
+    <string name="battery_title">배터리 잔량</string>
+    <string name="health_source">GET %1$s</string>
+    <string name="battery_source">Vehicle SDK · EvBattery</string>
+    <string name="battery_value">%1$d%%</string>
+    <string name="action_recheck">다시 확인</string>
+    <string name="action_reread">다시 읽기</string>
+    <string name="loading">불러오는 중…</string>
+    <string name="error_prefix">오류</string>
+</resources>

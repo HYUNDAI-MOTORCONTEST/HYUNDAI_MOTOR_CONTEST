@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Android Automotive OS(Pleos Connect) 전용 앱 -->
+    <uses-feature
+        android:name="android.hardware.type.automotive"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Vehicle SDK EvBattery 조회 권한 (사용하는 도메인 권한만 선언) -->
+    <uses-permission android:name="pleos.car.permission.CAR_ENERGY" />
+
+    <!-- screenOrientation은 지정하지 않는다: 가로·세로 레이아웃 모두 지원 -->
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.HmgApp">
+
+        <!-- CarUxRestrictionsManager(android.car). API 34 이미지는 bootclasspath에 있어 없어도 되지만,
+             예전 AAOS(android.car 공유 라이브러리)에서도 클래스를 찾게 선언한다. required=false: 없어도 설치·실행된다. -->
+        <uses-library
+            android:name="android.car"
+            android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|density|uiMode">
+            <!-- Distraction Optimized: 주행 중에도 이 화면을 쓸 수 있게 선언한다.
+                 DO를 선언하지 않으면 주행 중 사용 불가(docs/guides/pleos-dev.md 2.1장). 선언 방법은 Pleos 문서에 없어
+                 AAOS 방식을 따른다(docs/guides/google-cars.md 4장). 이 화면은 CarUxRestrictions를 받아
+                 제한을 직접 적용한다(MainActivity.kt MainScreen 주석). -->
+            <meta-data
+                android:name="distractionOptimized"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
