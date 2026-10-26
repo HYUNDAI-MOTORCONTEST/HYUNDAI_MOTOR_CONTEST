@@ -18,6 +18,7 @@
 | 경로 | Gradle | 내용 |
 | --- | --- | --- |
 | `frontend/app/` | `:frontend:app` | 차량 앱. Kotlin + Jetpack Compose, 일반 Activity 앱. minSdk 28, Vehicle SDK `ai.pleos.playground:Vehicle:2.3.2` |
+| `frontend/sandbox/` | `:frontend:sandbox` | 로컬 테스트용 샌드박스 앱 "아가랑 미니"(`com.hmgchallenge.sandbox`), 제출 대상 아님. 실행 `scripts/run-app.sh sandbox` |
 | `backend/` | `:backend` | Spring Boot(Kotlin) API 서버, 포트 8081 |
 | `shared/` | `:shared` | 앱·서버 공용 DTO(순수 Kotlin JVM, kotlinx.serialization) |
 | `apk/` | - | 제출용 release APK(`apk/팀명_앱이름_release.apk`) |

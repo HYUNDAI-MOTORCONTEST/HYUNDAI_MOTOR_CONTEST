@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Android Automotive OS(Pleos Connect) 전용 앱 -->
     <uses-feature
@@ -9,6 +10,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Vehicle SDK EvBattery 조회 권한 (사용하는 도메인 권한만 선언) -->
     <uses-permission android:name="pleos.car.permission.CAR_ENERGY" />
+    <!-- FusedLocation SDK aar이 자동으로 합치는 권한. SDK가 "준비 중(신청 불가)"이라 승인 전까지 제거한다.
+         FusedLocation을 실제로 쓰게 되면 이 줄을 지운다. -->
+    <uses-permission
+        android:name="ai.pleos.playground.service.location.fused.FUSED_LOCATION_BINDING"
+        tools:node="remove" />
 
     <!-- screenOrientation은 지정하지 않는다: 가로·세로 레이아웃 모두 지원 -->
     <application

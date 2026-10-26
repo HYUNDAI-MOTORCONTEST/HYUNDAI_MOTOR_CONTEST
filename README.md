@@ -119,6 +119,7 @@ scripts/run-app.sh -Phmg.backendUrl=http://10.0.2.2:9090
 .
 ├── apk/                 # 제출용 release APK (apk/팀명_앱이름_release.apk)
 ├── frontend/app/        # :frontend:app  Android Automotive 앱 (Kotlin + Jetpack Compose)
+├── frontend/sandbox/    # :frontend:sandbox  로컬 테스트용 샌드박스 앱 (아가랑 미니), 제출 대상 아님
 ├── backend/             # :backend       Spring Boot(Kotlin) API 서버
 ├── shared/              # :shared        앱·서버 공용 DTO (순수 Kotlin JVM, kotlinx.serialization)
 ├── scripts/             # 에뮬레이터·Virtual Console·캡처·앱 실행 스크립트
