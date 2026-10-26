@@ -24,7 +24,7 @@ dependencyResolutionManagement {
         maven {
             name = "PleosPlayground"
             url = uri("https://nexus-playground.pleos.ai/repository/maven-releases/")
-            content { includeGroup("ai.pleos.playground") }
+            content { includeGroupByRegex("ai\\.pleos\\.playground(\\..*)?") }
         }
     }
 }
@@ -34,3 +34,4 @@ rootProject.name = "hmg-vehicle-app"
 include(":shared")
 include(":backend")
 include(":frontend:app")
+include(":frontend:sandbox") // 로컬 테스트용 샌드박스 앱(제출 대상 아님)

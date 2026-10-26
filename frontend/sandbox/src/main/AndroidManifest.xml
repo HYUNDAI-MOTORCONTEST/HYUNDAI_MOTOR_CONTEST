@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 로컬 테스트용 샌드박스 앱 "아가랑 미니"(제출 대상 아님). 설정은 frontend/app/src/main/AndroidManifest.xml을 따른다. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Android Automotive OS(Pleos Connect) 전용 앱 -->
+    <uses-feature
+        android:name="android.hardware.type.automotive"
+        android:required="true" />
+
+    <!-- Vehicle SDK EvBattery 조회 권한. 본 앱과 같은 권한만 선언한다(새 차량 권한 추가 금지).
+         네트워크를 쓰지 않으므로 INTERNET 권한은 넣지 않는다. -->
+    <uses-permission android:name="pleos.car.permission.CAR_ENERGY" />
+
+    <!-- screenOrientation은 지정하지 않는다: 가로·세로 레이아웃 모두 지원 -->
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AgarangMini">
+
+        <!-- CarUxRestrictionsManager(android.car). required=false: 없어도 설치·실행된다. -->
+        <uses-library
+            android:name="android.car"
+            android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|density|uiMode">
+            <!-- Distraction Optimized: 주행 중에도 쓸 수 있게 선언한다(docs/guides/pleos-dev.md 2.1장).
+                 주행 중에는 예보 한 줄 + 큰 버튼 3개만 보인다(MainActivity.kt SandboxScreen 주석). -->
+            <meta-data
+                android:name="distractionOptimized"
+                android:value="true" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

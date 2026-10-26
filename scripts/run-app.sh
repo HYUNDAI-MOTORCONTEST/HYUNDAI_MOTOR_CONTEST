@@ -1,12 +1,35 @@
 #!/usr/bin/env bash
 # debug 앱을 빌드·설치하고 실행한다.
-# 사용법: scripts/run-app.sh [gradle 추가 인자...]
+# 사용법: scripts/run-app.sh [app|sandbox] [gradle 추가 인자...]
+#   예) scripts/run-app.sh                                   # 본 앱(:frontend:app) — 기본
 #   예) scripts/run-app.sh -Phmg.backendUrl=http://10.0.2.2:9090
+#   예) scripts/run-app.sh sandbox                           # 로컬 테스트용 샌드박스 앱(:frontend:sandbox, 제출 대상 아님)
+#   예) HMG_APP=sandbox scripts/run-app.sh                   # 환경변수로 골라도 된다(첫 인자가 우선)
 # JDK는 JAVA_HOME(17+) → Android Studio 내장 JBR → java_home 순으로 찾는다(_common.sh find_java_home).
 set -euo pipefail
 source "$(dirname "$0")/_common.sh"
 
-APP_ID="com.hmgchallenge.app"
+APP="${HMG_APP:-app}"
+if [[ $# -gt 0 && "$1" != -* ]]; then
+  APP="$1"
+  shift
+fi
+
+case "$APP" in
+  app)
+    MODULE=":frontend:app"
+    APP_ID="com.hmgchallenge.app"
+    LOG_TAG="HmgApp"
+    ;;
+  sandbox)
+    MODULE=":frontend:sandbox"
+    APP_ID="com.hmgchallenge.sandbox"
+    LOG_TAG="AgarangMini"
+    ;;
+  *)
+    die "알 수 없는 앱입니다: $APP (app 또는 sandbox)"
+    ;;
+esac
 ACTIVITY="$APP_ID/.MainActivity"
 
 setup_android_env
@@ -19,6 +42,6 @@ export JAVA_HOME
 adb get-state >/dev/null 2>&1 || die "연결된 기기가 없습니다. 에뮬레이터를 먼저 실행하세요(scripts/pleos-emu.sh --wait)."
 
 cd "$REPO_ROOT"
-./gradlew :frontend:app:installDebug "$@" || die "빌드·설치에 실패했습니다."
+./gradlew "$MODULE:installDebug" "$@" || die "빌드·설치에 실패했습니다."
 adb shell am start -n "$ACTIVITY" || die "앱 실행에 실패했습니다: $ACTIVITY"
-echo "실행: $ACTIVITY  (로그: adb logcat -s HmgApp)"
+echo "실행: $ACTIVITY  (로그: adb logcat -s $LOG_TAG)"

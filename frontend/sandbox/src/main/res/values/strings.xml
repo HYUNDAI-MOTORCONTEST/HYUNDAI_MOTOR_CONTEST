@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">아가랑 미니</string>
+
+    <!-- 운전 상태 배지 -->
+    <string name="drive_parked">주차 중</string>
+    <string name="drive_restricted">주행 중 · 제한</string>
+    <string name="drive_connecting">주행 상태 확인 중</string>
+    <string name="drive_unavailable">주행 상태 확인 불가</string>
+
+    <!-- 월령 선택 (주차 중에만 표시) -->
+    <string name="month_label">월령</string>
+    <string name="month_value">%1$d개월</string>
+    <string name="month_minus">−</string>
+    <string name="month_plus">+</string>
+    <string name="month_minus_desc">월령 줄이기</string>
+    <string name="month_plus_desc">월령 늘리기</string>
+
+    <!-- 큰 버튼 -->
+    <string name="btn_feed">수유</string>
+    <string name="btn_diaper">기저귀</string>
+    <string name="btn_sleep_start">수면 시작</string>
+    <string name="btn_sleep_end">수면 끝</string>
+    <string name="btn_last">마지막 %1$s</string>
+    <string name="btn_none">기록 없음</string>
+    <string name="btn_sleeping_since">%1$s부터 수면 중</string>
+
+    <!-- 예보 -->
+    <string name="forecast_title">수유 예보</string>
+    <string name="forecast_no_feed">수유 기록 없음</string>
+    <string name="forecast_no_feed_detail">수유 버튼을 누르면 예보가 시작됩니다</string>
+    <string name="forecast_remaining">다음 수유까지 약 %1$s</string>
+    <string name="forecast_overdue">예상 시각 %1$s 지남</string>
+    <string name="forecast_elapsed">마지막 수유 %1$s 전 (%2$s)</string>
+    <string name="forecast_interval">%1$d개월 기본 간격 %2$s · 예시 값 — 의학적 판단 아님</string>
+    <string name="forecast_line_remaining">다음 수유 약 %1$s 후 · %2$s</string>
+    <string name="forecast_line_overdue">수유 예상 %1$s 지남 · %2$s</string>
+    <string name="forecast_line_none">수유 기록 없음 · 수유 버튼을 누르세요</string>
+    <string name="stage_relaxed">여유</string>
+    <string name="stage_caution">주의</string>
+    <string name="stage_imminent">임박</string>
+    <string name="duration_hm">%1$d시간 %2$d분</string>
+    <string name="duration_h">%1$d시간</string>
+    <string name="duration_m">%1$d분</string>
+
+    <!-- 최근 기록 (주차 중에만 표시) -->
+    <string name="recent_title">최근 기록</string>
+    <string name="recent_empty">아직 기록이 없습니다</string>
+    <string name="event_feed">수유</string>
+    <string name="event_diaper">기저귀</string>
+    <string name="event_sleep_start">수면 시작</string>
+    <string name="event_sleep_end">수면 끝</string>
+    <string name="date_time">%1$s %2$s</string>
+
+    <!-- 하단 배터리 줄 -->
+    <string name="battery_value">배터리 %1$d%% · Vehicle SDK</string>
+    <string name="battery_loading">배터리 불러오는 중…</string>
+    <string name="battery_error">배터리 오류: %1$s</string>
+</resources>
