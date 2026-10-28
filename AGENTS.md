@@ -97,6 +97,9 @@ adb logcat -s HmgApp                 # 앱 로그
 1. **먼저 `docs/guides/`의 요약을 읽는다** — 색인 `docs/guides/README.md`.
    - `pleos-ui.md`: 화면 구조, 색·글자·아이콘, Compose 실무 수치
    - `pleos-dev.md`: 주행 규제(CarUxRestrictions), 주의 분산, 화면 모델, Vehicle SDK·권한, 에뮬레이터 주의점
+   - `pleos-components.md`: 디자인 가이드 나머지(운전용 설계 원칙, 모션·그림자·인터랙션, 컴포넌트 전체)
+   - `pleos-platform.md`: 기획·개발 가이드 나머지(성능 한도, 보안·개인정보, 오디오 포커스·음성 안내, CCP·Back, IME, FAQ, ADB)
+   - `pleos-sdk.md`: NaviHelper·FusedLocation·TTS·STT 사용법과 Vehicle SDK 보충
    - `google-cars.md`: Google/AAOS 가이드 요약(보조 근거)
 2. 요약에 없거나 세부 API가 필요하면 **Context7 MCP**(서버 이름 `context7`)로 찾는다. 등록: Claude Code `.mcp.json`, Codex `.codex/config.toml`.
    - 도구: `resolve-library-id`(라이브러리 ID 찾기), `query-docs`(질의). Claude Code에서는 `mcp__context7__resolve-library-id`, `mcp__context7__query-docs`로 보인다.
@@ -119,6 +122,8 @@ adb logcat -s HmgApp                 # 앱 로그
 - SDK가 없는 환경이나 권한 오류에서도 앱이 죽지 않게 `onFailed`와 예외를 처리하고, 실패 상태를 화면에 보여 준다.
 - 에뮬레이터에서 VIN은 "invalid"로 나온다(이미지 쪽 문제로 보임). 앱 로직이 VIN 값에 의존하지 않게 한다.
 - 운전 중 제한: `CarUxRestrictions`를 구독해 동영상·애니메이션·자동 스크롤·키보드 입력·설정 화면을 줄이거나 막는다(`docs/guides/pleos-dev.md`). 구독은 `driving/UxRestrictions.kt`, 화면은 `LocalUxRestrictions.current`로 읽는다.
+- 꼭 지킬 플랫폼 규칙(`docs/guides/pleos-platform.md` 0장): 최상위 화면 Back은 `finish()` 대신 `moveTaskToBack(true)`, CCP(로터리) 미지원이면 매니페스트에 선언하고 터치만으로 조작이 끝나야 함, 성능 한도(주행 중 CPU 5% 미만·정차 중 25% 이하·RAM 400MB 이하), 소리를 내면 오디오 포커스 요청·변경 처리 필수.
+- Pleos SDK(NaviHelper·FusedLocation·TTS·STT)를 처음 쓸 때는 `docs/guides/pleos-sdk.md`의 상태·권한·초기화·해제 규칙을 먼저 읽는다. TTS·STT 클라이언트 ID·시크릿은 `local.properties`나 환경변수로만 다룬다.
 - 테마: 색은 `ui/theme/PleosColors.kt`(Pleos 토큰 주간/야간), 글자는 `ui/theme/Type.kt`(Asta Sans + Pleos 위계). 화면 코드에 색·`fontSize`를 하드코딩하지 않는다.
 - 변경 후 최소 검증: `./gradlew :frontend:app:assembleDebug`(앱), `./gradlew :backend:build`(서버), `./gradlew :shared:build`(공용).
 - git commit·push는 사용자가 요청할 때만 한다.

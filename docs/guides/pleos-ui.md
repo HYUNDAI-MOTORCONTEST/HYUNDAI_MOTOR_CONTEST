@@ -3,6 +3,7 @@
 > 직접 쓴 요약이다. 원문을 옮기지 않았고, 최종 기준은 각 항목의 원문 URL이다.
 > 확인일: 2026-10-25 (한국어 페이지 기준)
 > 표기: **[문서]** 원문에 있는 내용, **[문서에 없음]** 원문에 수치·규칙이 없어 다른 근거로 정한 팀 권장값(근거를 같이 적음).
+> 그 밖의 컴포넌트(Icon·Toggle 버튼, Tabs, Slider, Toast, Popup 등)와 그림자·모션·앱 아이콘 요약은 [pleos-components.md](pleos-components.md).
 
 원문 약칭 (모두 `https://document.pleos.ai` 아래)
 

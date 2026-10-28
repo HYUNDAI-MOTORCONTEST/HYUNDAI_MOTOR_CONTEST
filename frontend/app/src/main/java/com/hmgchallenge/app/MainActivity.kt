@@ -2,6 +2,7 @@ package com.hmgchallenge.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -50,6 +51,9 @@ import com.hmgchallenge.shared.HealthResponse
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Pleos Back 정책(docs/guides/pleos-platform.md 9장): 최상위 화면에서 Back이 오면 앱을 끝내지 않고 숨긴다.
+        // 지금은 화면이 하나라 항상 최상위다. 하위 화면·팝업이 생기면 그쪽 BackHandler가 먼저 받게 한다.
+        onBackPressedDispatcher.addCallback(this) { moveTaskToBack(true) }
         setContent {
             VehicleTheme {
                 val vm: MainViewModel = viewModel()

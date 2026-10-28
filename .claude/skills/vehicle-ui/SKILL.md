@@ -7,8 +7,10 @@ description: Pleos Connect 차량 앱의 Jetpack Compose UI(화면, 컴포넌트
 
 ## 1. 먼저 읽기
 1. `docs/guides/pleos-ui.md` — 특히 10장 "Compose 구현 실무 규칙" 표.
-2. 운전 중 동작이 걸리면 `docs/guides/pleos-dev.md` 2장(주행 규제)·3장(주의 분산).
-3. 수정할 화면 코드(`frontend/app/src/main/java/com/hmgchallenge/app/`)와 `AndroidManifest.xml`.
+2. 컴포넌트(팝업, 토스트, 스위치, 필드, 세그먼트 메뉴 등)·모션·그림자가 걸리면 `docs/guides/pleos-components.md`에서 해당 컴포넌트 절과 6장 우선순위 표.
+3. 운전 중 동작이 걸리면 `docs/guides/pleos-dev.md` 2장(주행 규제)·3장(주의 분산).
+4. Back 처리·로터리(CCP)·키보드(IME)·소리가 걸리면 `docs/guides/pleos-platform.md`(0장 핵심 규칙표).
+5. 수정할 화면 코드(`frontend/app/src/main/java/com/hmgchallenge/app/`)와 `AndroidManifest.xml`.
 
 ## 2. 요약에 없을 때만 원문 조회
 - Pleos SDK·개발 가이드: Context7 `mcp__context7__query-docs`, `libraryId="/websites/document_pleos_ai_en"`(영어, 부분 색인).
@@ -34,6 +36,9 @@ Pleos UI 디자인 가이드 → Pleos 기획·개발 가이드·SDK 레퍼런�
 - [ ] **텍스트 길이**: 한 메시지 3줄 이하, `maxLines` + `TextOverflow.Ellipsis`. 문자열은 `strings.xml`.
 - [ ] **응답성**: 터치 즉시 pressed·loading 표시(0.25초 기준). Vehicle SDK·네트워크 호출은 메인 스레드를 막지 않는다.
 - [ ] **조작 단순화**: 자주 쓰는 기능은 첫 화면에, 작업은 3번 터치 이내. 드롭다운·다단 메뉴 지양. 키보드보다 프리셋·최근 항목·음성.
+- [ ] **모션**: 애니메이션은 Pleos easing·duration 토큰(`pleos-components.md` 4장)을 따른다. 장식·전환 애니메이션은 운전 중 끄고, 누름 피드백(95% 축소·색 변화)은 유지한다.
+- [ ] **Back**: 최상위 화면 Back은 `moveTaskToBack(true)`(`finish()` 금지, `pleos-platform.md`).
+- [ ] **시스템 UI와 겹침**: Status bar·GNB·Window bar 같은 시스템 영역을 앱이 그리거나 덮지 않는다.
 - [ ] **실패 상태**: Vehicle SDK `onFailed`, 권한 없음, VIN "invalid"(에뮬레이터)에서도 화면이 깨지지 않고 상태를 보여 준다.
 - [ ] **권한**: 새 차량 도메인을 쓰면 승인된 `pleos.car.permission.*`만 추가(`pleos-dev.md` 5장).
 
