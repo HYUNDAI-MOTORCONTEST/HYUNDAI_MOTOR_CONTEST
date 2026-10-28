@@ -3,6 +3,7 @@
 > 직접 쓴 요약이다. 원문을 옮기지 않았고, 최종 기준은 각 항목의 원문 URL이다.
 > 확인일: 2026-10-25 (한국어 페이지 기준)
 > 표기: **[문서]** 원문에 있는 내용, **[문서에 없음]** 다른 근거로 정한 팀 권장(근거를 같이 적음).
+> 관련 요약: 오디오 포커스·CCP·IME·성능·보안·FAQ·ADB는 [pleos-platform.md](pleos-platform.md), NaviHelper·FusedLocation·TTS·STT와 Vehicle 오류 코드는 [pleos-sdk.md](pleos-sdk.md).
 
 원문 약칭 (모두 `https://document.pleos.ai` 아래)
 
@@ -71,6 +72,7 @@ Compose 적용: 상태는 ViewModel + `SavedStateHandle`/저장소에 두고, �
 
 - 주차 중에는 모든 지역에서 전부 허용.
 - [문서에 없음] 한국이 "그 외 지역"에 들어가는지는 명시되지 않았다. 지역별 분기 대신 플래그만 보고 처리하면 지역과 무관하게 맞게 동작한다.
+- 참고: FAQ(`/docs/pleos-only/vehicle-app-developer-guide/vehicle-app-faq`)는 지역 코드 프로퍼티 `product.sw.target_region`(한국 `KOR`, 유럽 `EUR`, 북미 `USA`·`CAN`)을 안내한다. 우리는 주행 규제에 이 값을 쓰지 않는다(`pleos-platform.md` 13장).
 
 ### 2.4 우리 앱 규칙 [문서에 없음 — 위 문서들에서 정한 팀 규칙]
 - 플래그별 처리: NO_VIDEO → 영상 정지·재생 버튼 비활성, NO_KEYBOARD → 텍스트 입력 필드 숨김(프리셋·최근 항목·음성으로 대체), NO_SETUP → 설정·로그인 진입 막고 "주차 후 이용" 안내, LIMIT_STRING_LENGTH·LIMIT_CONTENT → 긴 텍스트·긴 목록 축약.
@@ -84,7 +86,7 @@ Compose 적용: 상태는 ViewModel + `SavedStateHandle`/저장소에 두고, �
 - 운전에 필요한 정보는 짧은 시간에 이해되게 간결하게. HUD·클러스터·OSD를 쓰면 그 영역 정책을 따른다.
 - 주행 중 동영상·애니메이션·움직이는 이미지를 줄이거나 막는다. 장식용·반복 움직임은 쓰지 않는다.
 - 주행 중 필요한 기능을 우선 배치하고 메뉴 구조를 단순하게. 자주 쓰는 기능은 첫 화면·상단에. 드롭다운·다단 메뉴 남용 금지. 자동 전환·반복 화면 전환 최소화.
-- 중요한 오디오 안내가 나오면 오디오 포커스 정책대로 미디어를 멈추거나 줄인다(오디오 포커스 개발 가이드).
+- 중요한 오디오 안내가 나오면 오디오 포커스 정책대로 미디어를 멈추거나 줄인다(오디오 포커스 개발 가이드, 요약은 `pleos-platform.md` 6장).
 - 큰 터치 영역, 높은 대비, 적은 텍스트. 버튼 크기·간격은 UI 디자인 가이드 기준(수치는 `pleos-ui.md` 10장의 팀 규칙).
 - 터치 조작을 줄이고 음성·물리 버튼 등 차량 입력과 연계한다.
 - 게임, 인터넷 서핑, 피트니스처럼 주의를 빼앗는 활동을 유도하지 않는다.
@@ -127,7 +129,8 @@ Compose 적용: 상태는 ViewModel + `SavedStateHandle`/저장소에 두고, �
 - 권한이 없으면 `onFailed`로 예외가 오고, `VehicleException`이면 `ERROR_SECURITY_PERMISSION`일 수 있다.
 - Playground 프로젝트 기준 사용 가능: Vehicle State(조회), NaviHelper. 준비 중: Vehicle Control, FusedLocation, TextToSpeech, SpeechToText(PROJ). 제어 API 사용은 현재 막혀 있다고 보고 설계한다.
 - 표는 도메인별 "대표" 권한이다. 세부 API마다 요구 권한이 다를 수 있으니 호출 전에 API 레퍼런스의 `@RequiresPermission`(PleosPermission 상수)을 확인한다(PERM).
-- [문서에 없음] Steeringwheel 도메인은 대표 권한 표에 없다. 쓰기 전에 해당 API의 `@RequiresPermission`으로 확인한다.
+- [문서에 없음] Steeringwheel 도메인은 대표 권한 표에 없다. 쓰기 전에 해당 API의 `@RequiresPermission`으로 확인한다. [팀 확인] Vehicle 2.3.2 AAR에서 `getCurrentSteeringWheelAngle`·`registerSteeringWheelAngle`은 `CAR_DRIVE`다(2026-10-25 javap).
+- 오류 코드(`VehicleException.errorCode`)와 capability 모델은 `pleos-sdk.md` 5장.
 
 ## 6. 에뮬레이터 주의점
 
@@ -140,4 +143,5 @@ Compose 적용: 상태는 ViewModel + `SavedStateHandle`/저장소에 두고, �
 - [팀 관찰, 2026-10-25] 에뮬레이터 v2.1.0은 user 빌드라 `adb root`, `cmd car_service inject-vhal-event` 등 car_service 셸 명령이 막혀 있다. 주행 상태는 Virtual Console로만 바꾼다.
   - 화면에서: Vehicle(Motion) 영역의 기어 D + 가속 페달로 속도를 올린다. 되돌릴 때는 P.
   - 자동화(비공식, 바뀔 수 있음): Virtual Console 페이지가 쓰는 HTTP 호출. 브라우저 세션이 살아 있어야 값이 반영되므로(`POST /browser/session?client=<id>`를 1초마다 보냄) 그동안 `PUT /vehicle/gear?gear=Drive|Park`, `PUT /vehicle/controls?speed=<kph>&accelerator=<0~100>&brake=<0~100>`를 부른다. 세션이 끊겨도 마지막 값은 유지됐다.
+  - [문서] ADB 가이드(`/docs/pleos-only/vehicle-app-developer-guide/adb-command-reference-guide`)에 `adb shell cmd hmg_car_service --service drivingstate driving_regulation on|off`("모든 차종 공통")가 있다. 이 에뮬레이터에서 되는지는 아직 시험하지 않았다(2026-10-28).
   - 확인: `adb shell dumpsys car_service --services CarUxRestrictionsManagerService | grep 'Display id'` → 주차 `DO: false UxR: 0`, 주행(D, 10km/h) `DO: true UxR: 80`(= NO_VIDEO 16 + NO_SETUP 64). 이 이미지의 기본 설정은 idling·moving 모두 0x50이고 문자열 제한 길이 120.

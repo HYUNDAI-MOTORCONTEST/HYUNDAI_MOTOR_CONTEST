@@ -9,6 +9,9 @@
 | --- | --- | --- |
 | [pleos-ui.md](pleos-ui.md) | Pleos Connect UI 디자인 가이드: 화면 구조, window·방향, 폼팩터, 색·글자·아이콘·버튼, Compose 실무 수치 | https://document.pleos.ai/docs/connect/guide/docs-design/Introduction/intro |
 | [pleos-dev.md](pleos-dev.md) | 기획·개발 가이드: 주행 규제(CarUxRestrictions), 주의 분산, 앱 구조·화면 모델, Vehicle SDK·권한, 에뮬레이터 주의점 | https://document.pleos.ai/docs/pleos-only/vehicle-app-planning-guide/intro , https://document.pleos.ai/docs/pleos-only/vehicle-app-developer-guide/intro |
+| [pleos-components.md](pleos-components.md) | UI 디자인 가이드 나머지: 운전용 앱 설계 원칙, 디자인 토큰·테마, Driving view·Gleo, 애니메이션·그림자·인터랙션, 앱 아이콘, 컴포넌트 전체(버튼·팝업·토스트·필드·선택·알림 등)와 우리 앱 우선순위 | https://document.pleos.ai/docs/connect/guide/docs-design/Introduction/designing-apps-for-driving |
+| [pleos-platform.md](pleos-platform.md) | 기획·개발·테스트 가이드 나머지: SDK 정책·호환성, 보안·개인정보, 성능 한도, 오디오 포커스·Suspend·음성 안내 선행 묵음, CCP·Back, IME, 음악·내비 앱, FAQ, ADB, Virtual Console | https://document.pleos.ai/docs/pleos-only/vehicle-app-developer-guide/intro |
+| [pleos-sdk.md](pleos-sdk.md) | NaviHelper·FusedLocation·TextToSpeech·SpeechToText 사용법(상태, 권한, 초기화·해제, AAR로 확인한 시그니처, 오류 코드), Vehicle SDK 보충 | https://document.pleos.ai/docs/pleos-only/connect-sdk-pleos/ |
 | [google-cars.md](google-cars.md) | Google Design for Driving, Android for Cars, 차량 앱 품질 기준, AAOS 주의 분산 가이드라인(보조 근거) | https://developer.android.com/design/ui/cars , https://source.android.com/docs/automotive/driver_distraction/guidelines |
 
 ## 우선순위 (충돌하면 위가 이긴다)
